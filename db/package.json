@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "start": "npx json-server data.json --watch data.json --3000"
+  }
+}

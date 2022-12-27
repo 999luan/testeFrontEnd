@@ -1,28 +1,28 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="jumbotron jumbotron-fluid">
+      <h1 class="display-4">Cadastro de Usuario e Produto</h1>
+      <p class="lead">
+        Usando a biblioteca Axios para fazer chamadas Ajax à uma API REST.
+      </p>
+    </div>
+    <div>
+      <div class="container">
+        <PessoasLista />
+        <ProdutoLista />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import PessoasLista from "./components/listas/PessoasLista.vue";
+import ProdutoLista from "./components/listas/ProdutoLista.vue";
 
 export default {
-  name: 'App',
   components: {
-    HelloWorld
-  }
-}
+    PessoasLista,
+    ProdutoLista,
+  },
+};
 </script>
-
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

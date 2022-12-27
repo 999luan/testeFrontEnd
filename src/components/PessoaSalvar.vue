@@ -1,0 +1,81 @@
+<template>
+  <div class="mt-4">
+    <hr />
+    <h2 class="font-weight-light">Salvar Usuario</h2>
+    <form @submit.prevent="salvar">
+      <div class="row">
+        <div :class="classeColuna">
+          <div class="form-group">
+            <label>Nome:</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Nome"
+              v-model="pessoaLocal.nome"
+            />
+            <label>Cpf:</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Cpf"
+              v-model="pessoaLocal.cpf"
+            />
+            <label>Data de Nascimento:</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Data de nascimento"
+              v-model="pessoaLocal.dataNascimento"
+            />
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Salvar</button>
+    </form>
+  </div>
+</template>
+
+<script>
+export default {
+  props: {
+    pessoa: {
+      type: Object,
+      default: undefined,
+    },
+  },
+  data() {
+    return {
+      pessoaLocal: Object.assign(
+        {},
+        { nome: "", cpf: "", dataNascimento: "" },
+        this.pessoa
+      ),
+    };
+  },
+  computed: {
+    classeBotao() {
+      return {};
+    },
+    classeColuna() {
+      return this.pessoa ? "col-sm-10" : "col-sm-12";
+    },
+  },
+  watch: {
+    pessoa(pessoaNova, pessoaAntiga) {
+      this.pessoaLocal = Object.assign({}, this.pessoa);
+    },
+  },
+  methods: {
+    salvar(event) {
+      const operacao = !this.pessoa ? "criar" : "editar";
+      this.$emit(operacao, this.pessoaLocal);
+      this.pessoaLocal = {
+        nome: "",
+        cpf: "",
+        dataNascimento: "",
+      };
+    },
+  },
+};
+</script>
