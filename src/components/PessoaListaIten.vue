@@ -1,6 +1,6 @@
 <template>
-  <li class="list-group-item d-flex">
-    <div>
+  <li>
+    <div class="usuarioLista">
       <span>Nome: {{ pessoa.nome }} | </span>
       <span>Cpf: {{ pessoa.cpf }} | </span>
       <span>Nascimento:{{ pessoa.dataNascimento }}</span>
@@ -50,5 +50,8 @@ export default {
 <style scoped>
 .espacar {
   flex: 1 1 auto;
+}
+.usuarioLista {
+  display: flex;
 }
 </style>

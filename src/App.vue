@@ -1,28 +1,43 @@
 <template>
   <div id="app">
-    <div class="jumbotron jumbotron-fluid">
-      <h1 class="display-4">Cadastro de Usuario e Produto</h1>
-      <p class="lead">
-        Usando a biblioteca Axios para fazer chamadas Ajax à uma API REST.
-      </p>
+    <div class="jumbotron">
+      <h1 class="display-4">TEste front End</h1>
+      <p class="lead">o texto da sua marca aqui</p>
     </div>
-    <div>
-      <div class="container">
-        <PessoasLista />
-        <ProdutoLista />
-      </div>
+    <div class="container">
+      <nav>
+        <router-link
+          to="/"
+          class="btn btn-primary mb-2 mr-2"
+          active-class="active"
+          exact
+          >Home</router-link
+        >
+        <router-link
+          to="/usuario"
+          class="btn btn-primary mb-2 mr-2"
+          active-class="active"
+          >Usuario</router-link
+        >
+        <!-- //o bootsrap possui uma classe router-ativa chamada "active" //-->
+        <router-link
+          to="/produto"
+          class="btn btn-primary mb-2 mr-2"
+          active-class="active"
+          >Produto</router-link
+        >
+      </nav>
+      <router-view />
     </div>
   </div>
 </template>
 
-<script>
-import PessoasLista from "./components/listas/PessoasLista.vue";
-import ProdutoLista from "./components/listas/ProdutoLista.vue";
+<style lang="scss">
+* {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 
-export default {
-  components: {
-    PessoasLista,
-    ProdutoLista,
-  },
-};
-</script>
+  box-sizing: border-box;
+}
+</style>
