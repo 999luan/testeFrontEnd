@@ -8,8 +8,8 @@
     <div class="card border border-light rounded w-auto h-auto p-3 mr-2" >
       <h3 class="card-title font-weight-light">  Nome:  {{ pessoa.nome }}</h3>
       <h3 class="card-text font-weight-light" >CPF: {{ pessoa.cpf }} </h3>
-      <h3 class="card-text font-weight-light">Nascimento:   {{ pessoa.dataNascimento }}</h3>
        
+      <h3 class="card-text font-weight-light">Nascimento:   {{ pessoa.dataNascimento.slice(-2) }} / {{ pessoa.dataNascimento.slice(5,7) }} / {{ pessoa.dataNascimento.slice(0,4) }} </h3>
      
      
       <div class="card-text">

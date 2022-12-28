@@ -1,5 +1,5 @@
-// A children recebe por padrão o componente que vai ser exibido e o router
-view.
+// A children recebe por padrão o componente que vai ser exibido e o
+router-view.
 <template>
   <div class="">
     <ProdutoLista id="listaParametros" />

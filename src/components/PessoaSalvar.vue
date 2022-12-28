@@ -26,7 +26,6 @@ no componente principal de lista
               class="form-control"
               placeholder="CPF"
               v-model="pessoaLocal.cpf"
-              oninvalid="this.setCustomValidity('Insira um CPF com 11 digitos')"
               required
             />
             <label>Data de Nascimento:</label>
