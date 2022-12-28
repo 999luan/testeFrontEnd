@@ -1,39 +1,54 @@
 <template>
   <div>
     <div class="row">
-      <div class="col-sm-10">
-        <h1 class="font-weight-light">Lista de Usuarios</h1>
-      </div>
-      <div class="col-sm-2">
+      <div class="container">
         <button
           class="btn btn-primary float-right"
           @click="exibirFormularioCriarProduto"
         >
-          <i class="fa fa-plus mr-2"></i>
-          <span>Criar Usuario</span>
+          <i class="fa fa-plus mr-12"></i>
+          <span>Criar Produto</span>
         </button>
       </div>
+      <div class="col-sm-12">
+        <h1 class="font-weight-light text-light pl-5">Lista de Produtos</h1>
+      </div>
 
-      <ul class="list-group" v-if="produtos.length > 0">
-        <ProdutoListaIten
-          v-for="produto in produtos"
-          :key="produto.id"
-          :produto="produto"
-          @editar="selecionarUsuarioEditar"
-          @deletar="deletarProduto"
-        />
-      </ul>
+      <div class="col-sm-12">
+        <ul class="list-group d-flex" v-if="produtos.length > 0">
+          <ProdutoSalvar
+            class="list-group-item"
+            v-if="exibirFormulario"
+            :produto="produtoSelecionado"
+            @criar="cadastrarProduto"
+            @editar="editarProduto"
+          />
+        </ul>
 
-      <p v-else-if="!mensagemErro">Nenhuma usuario criado.</p>
-      <div class="alert alert-danger" v-else>{{ mensagemErro }}</div>
-      <!-- a variavel foi criada em  emit: ProdutoSalvar -->
-      <ProdutoSalvar
-        v-if="exibirFormulario"
-        :produto="produtoSelecionado"
-        @criar="cadastrarProduto"
-        @editar="editarProduto"
-      />
+        <div class="col-sm-12">
+          <ul
+            class="list-group d-flex flex-row flex-wrap"
+            v-if="produtos.length > 0"
+          >
+            <ProdutoListaIten
+              class="list-group-item"
+              v-for="produto in produtos"
+              :key="produto.id"
+              :produto="produto"
+              @editar="selecionarUsuarioEditar"
+              @deletar="deletarProduto"
+            />
+          </ul>
+
+          <p v-else-if="!mensagemErro">Nenhuma produto registrado.</p>
+          <div class="alert alert-danger" v-else>{{ mensagemErro }}</div>
+          <!-- a variavel foi criada em  emit: ProdutoSalvar -->
+        </div>
+      </div>
     </div>
+    <button class="btn btn-secondary float-right" @click="voltar">
+      Voltar
+    </button>
   </div>
 </template>
 
@@ -41,7 +56,7 @@
 import axios from "../../axios";
 
 import ProdutoSalvar from "../ProdutoSalvar.vue";
-import ProdutoListaIten from "../ProdutoListaIten.vue";
+import ProdutoListaIten from "../items/ProdutoListaIten.vue";
 
 export default {
   components: {
@@ -80,8 +95,21 @@ export default {
         }
       });
   },
+  computed: {
+    produtosFiltrados() {
+      const busca = this.busca;
+      return !busca
+        ? this.produtos
+        : this.produtos.filter((c) =>
+            c.descricao.toLowerCase().includes(busca.toLowerCase())
+          );
+    },
+  },
 
   methods: {
+    voltar(event) {
+      this.$router.back();
+    },
     cadastrarProduto(produto) {
       axios.post(`/produtos`, produto).then((response) => {
         this.produtos.push(response.data);
@@ -91,7 +119,7 @@ export default {
     },
 
     deletarProduto(produto) {
-      const confirmar = window.confirm(`Deseja deletar usuario?`);
+      const confirmar = window.confirm(`Deseja deletar produto?`);
       if (confirmar) {
         axios.delete(`/produtos/${produto.id}`).then((response) => {
           console.log("Deletado");

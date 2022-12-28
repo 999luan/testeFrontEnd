@@ -1,7 +1,7 @@
 <template>
   <div class="row">
-    <ProdutoLista />
     <router-view></router-view>
+    <ProdutoLista />
   </div>
 </template>
 
@@ -9,7 +9,7 @@
 import ProdutoLista from "@/components/listas/ProdutoLista.vue";
 
 export default {
-  name: "ProdutoView",
+  name: "ProdutoDetalhe",
   components: {
     ProdutoLista,
   },

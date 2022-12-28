@@ -1,31 +1,34 @@
 <template>
   <div class="mt-4">
     <hr />
-    <h2 class="font-weight-light">Salvar Usuario</h2>
+    <h2 class="font-weight-light">Salvar Produto</h2>
     <form @submit.prevent="salvar">
       <div class="row">
         <div :class="classeColuna">
           <div class="form-group">
-            <label>id:</label>
             <input
-              type="text"
-              class="form-control"
+              type="number"
+              class="form-control invisible"
               placeholder="ID"
-              v-model="produtoLocal.id"
+              v-model="produtoLocal.lenght"
             />
-            <label>descrição:</label>
+            <label>Nome:</label>
             <input
               type="text"
               class="form-control"
-              placeholder="Descrição"
+              placeholder="Nome do produto"
               v-model="produtoLocal.descricao"
+              oninvalid="this.setCustomValidity('Insirar um Nome no produto')"
+              required
             />
             <label>valor unitario:</label>
             <input
-              type="text"
+              type="number"
               class="form-control"
               placeholder="valor unitario"
               v-model="produtoLocal.valoUnitario"
+              oninvalid="this.setCustomValidity('Insira um valor')"
+              required
             />
           </div>
         </div>
@@ -54,9 +57,6 @@ export default {
     };
   },
   computed: {
-    classeBotao() {
-      return {};
-    },
     classeColuna() {
       return this.produto ? "col-sm-10" : "col-sm-12";
     },

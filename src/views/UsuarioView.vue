@@ -1,7 +1,7 @@
 <template>
-  <div class="home">
-    <h3 class="font-weight-light">Usuario</h3>
+  <div class="row">
     <PessoasLista />
+    <router-view></router-view>
   </div>
 </template>
 

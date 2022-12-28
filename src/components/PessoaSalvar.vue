@@ -8,24 +8,32 @@
           <div class="form-group">
             <label>Nome:</label>
             <input
+              title="Insira um Nome"
               type="text"
               class="form-control"
               placeholder="Nome"
               v-model="pessoaLocal.nome"
+              required
             />
+
             <label>Cpf:</label>
             <input
-              type="text"
+              type="number"
+              pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
               class="form-control"
               placeholder="Cpf"
               v-model="pessoaLocal.cpf"
+              title="Insira seu CPF"
+              required
             />
             <label>Data de Nascimento:</label>
             <input
-              type="text"
+              type="date"
               class="form-control"
               placeholder="Data de nascimento"
               v-model="pessoaLocal.dataNascimento"
+              title="Insira sua data de Nascimento"
+              required
             />
           </div>
         </div>

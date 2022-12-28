@@ -2,9 +2,6 @@
   <div>
     <div class="row">
       <div class="col-sm-10">
-        <h1 class="font-weight-light">Lista de Usuarios</h1>
-      </div>
-      <div class="col-sm-2">
         <button
           class="btn btn-primary float-right"
           @click="exibirFormularioCriarUsuario"
@@ -13,27 +10,44 @@
           <span>Criar Usuario</span>
         </button>
       </div>
+      <div class="col-sm-12">
+        <h1 class="font-weight-light text-light pl-5">Lista de Usuarios</h1>
+      </div>
 
-      <ul class="list-group" v-if="pessoas.length > 0">
-        <PessoaListaIten
-          v-for="pessoa in pessoas"
-          :key="pessoa.id"
-          :pessoa="pessoa"
-          @editar="selecionarUsuarioEditar"
-          @deletar="deletarUsuario"
-        />
-      </ul>
+      <div class="container-fluid col-sm-5">
+        <ul class="list-group d-flex" v-if="pessoas.length > 0">
+          <PessoaSalvar
+            class="list-group-item"
+            v-if="exibirFormulario"
+            :pessoa="usuarioSelecionado"
+            @criar="cadastrarUsuario"
+            @editar="editarUsuario"
+          />
+        </ul>
+      </div>
+      <div class="container-fluid col-sm-5">
+        <ul
+          class="list-group d-flex flex-row flex-wrap"
+          v-if="pessoas.length > 0"
+        >
+          <PessoaListaIten
+            class="list-group-item"
+            v-for="pessoa in pessoas"
+            :key="pessoa.id"
+            :pessoa="pessoa"
+            @editar="selecionarUsuarioEditar"
+            @deletar="deletarUsuario"
+          />
+        </ul>
 
-      <p v-else-if="!mensagemErro">Nenhuma usuario criado.</p>
-      <div class="alert alert-danger" v-else>{{ mensagemErro }}</div>
-      <!-- a variavel foi criada em  emit: pessoaSalvar -->
-      <PessoaSalvar
-        v-if="exibirFormulario"
-        :pessoa="usuarioSelecionado"
-        @criar="cadastrarUsuario"
-        @editar="editarUsuario"
-      />
+        <p v-else-if="!mensagemErro">Nenhuma usuario criado.</p>
+        <div class="alert alert-danger" v-else>{{ mensagemErro }}</div>
+        <!-- a variavel foi criada em  emit: pessoaSalvar -->
+      </div>
     </div>
+    <button class="btn btn-secondary float-right" @click="voltar">
+      Voltar
+    </button>
   </div>
 </template>
 
@@ -41,7 +55,7 @@
 import axios from "../../axios";
 
 import PessoaSalvar from "../PessoaSalvar.vue";
-import PessoaListaIten from "../PessoaListaIten.vue";
+import PessoaListaIten from "../items/PessoaListaIten.vue";
 
 export default {
   components: {
@@ -55,6 +69,10 @@ export default {
       usuarioSelecionado: undefined,
       mensagemErro: undefined,
     };
+  },
+  beforeRouteUpdate(to, pessoas, next) {
+    pessoas.id = to.params.id;
+    next();
   },
   created() {
     // recebe dados da api
@@ -80,8 +98,21 @@ export default {
         }
       });
   },
+  computed: {
+    usuariosFiltrados() {
+      const busca = this.busca;
+      return !busca
+        ? this.pessoas
+        : this.pessoas.filter((c) =>
+            c.nome.toLowerCase().includes(busca.toLowerCase())
+          );
+    },
+  },
 
   methods: {
+    voltar(event) {
+      this.$router.back();
+    },
     cadastrarUsuario(pessoa) {
       axios.post(`/pessoas`, pessoa).then((response) => {
         this.pessoas.push(response.data);
