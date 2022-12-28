@@ -3,12 +3,12 @@ propriedades //console.log(produto) //este componente recebe dados de
 ProdutoLista
 <template>
   <li class="card d-flex col-sm-12 w-auto pr-8 bg-transparent">
-    <div class="card border border-light rounded w-auto h-auto p-3 mr-2">
-      <h4 class="card-title font-weight-light">
-        Nome: {{ produto.descricao }}
-      </h4>
-      <h4 class="card-text font-weight-light">ID: {{ produto.id }}</h4>
-      <h4 class="card-text font-weight-light">
+    <div
+      class="card border border-light rounded w-auto h-auto p-3 mr-2 bg-warning"
+    >
+      <h4 class="card-title font-weight-dark">Nome: {{ produto.descricao }}</h4>
+      <h4 class="card-text font-weight-dark">ID: {{ produto.id }}</h4>
+      <h4 class="card-text font-weight-dark">
         Valor Unitário: {{ produto.valoUnitario }}
       </h4>
 

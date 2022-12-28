@@ -4,12 +4,12 @@
 
 <template >
 
-  <li class="card d-flex  col-sm-12 w-auto pr-8 bg-transparent">
-    <div class="card border border-light rounded w-auto h-auto p-3 mr-2" >
-      <h3 class="card-title font-weight-light">  Nome:  {{ pessoa.nome }}</h3>
-      <h3 class="card-text font-weight-light" >CPF: {{ pessoa.cpf }} </h3>
+  <li class="card d-flex  col-sm-12 w-auto border-none pr-8 bg-transparent">
+    <div class="card  rounded w-auto h-auto p-3 mr-2 bg-warning" >
+      <h3 class="card-title font-weight-dark">  Nome:  {{ pessoa.nome }}</h3>
+      <h3 class="card-text font-weight-dark" >CPF: {{ pessoa.cpf }} </h3>
        
-      <h3 class="card-text font-weight-light">Nascimento:   {{ pessoa.dataNascimento.slice(-2) }} / {{ pessoa.dataNascimento.slice(5,7) }} / {{ pessoa.dataNascimento.slice(0,4) }} </h3>
+      <h3 class="card-text font-weight-dark">Nascimento:   {{ pessoa.dataNascimento.slice(-2) }} / {{ pessoa.dataNascimento.slice(5,7) }} / {{ pessoa.dataNascimento.slice(0,4) }} </h3>
      
      
       <div class="card-text">

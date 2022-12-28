@@ -1,4 +1,4 @@
-# teste-escriba
+# Teste escriba
 
 ## Instalar dependencias
 
@@ -6,7 +6,7 @@
 npm i
 ```
 
-### rodar localmente
+### Rodar localmente
 
 ```
 npm run serve

@@ -2,13 +2,13 @@
 //metodo salvar pode receber os parametro "criar", e " editar", o metodo é usado
 no componente principal de lista
 <template>
-  <div class="mt-4">
+  <div class="mt-4 bg-warning">
     <hr />
     <h2 class="font-weight-light">Salvar Usuário</h2>
     <form @submit.prevent="salvar">
-      <div class="row">
+      <div class="row bg-warning">
         <div :class="classeColuna">
-          <div class="form-group">
+          <div class="form-group bg-warning">
             <label>Nome:</label>
             <input
               title="Insira um Nome"
