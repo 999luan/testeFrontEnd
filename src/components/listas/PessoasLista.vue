@@ -1,21 +1,29 @@
+// lista é a parte funcional do componente // Axios executa os methodos e o get
+é retornado para o array " pessoa" // o array pessoa é filtrado, e enviado para
+o componente de item ("PessoaListaIten") // (PessoaSalvar) executa um put
+utilizando axios e se comunica com a rede //botao chama metodo de deletar
+usuario, que utiliza axios para fazer um "Delet" //@criar e @editar são criados
+no metodo Salvar de PessoaSalvar
 <template>
-  <div>
+  <div class="">
     <div class="row">
       <div class="col-sm-10">
+        <!-- botão que chama methodo para abrir componente de novo usuario (Pessoa Salvar) -->
         <button
           class="btn btn-primary float-right"
           @click="exibirFormularioCriarUsuario"
         >
           <i class="fa fa-plus mr-2"></i>
-          <span>Criar Usuario</span>
+          <span>Criar Usuário</span>
         </button>
       </div>
       <div class="col-sm-12">
-        <h1 class="font-weight-light text-light pl-5">Lista de Usuarios</h1>
+        <h1 class="font-weight-light text-light pl-5">Lista de Usuários</h1>
       </div>
 
       <div class="container-fluid col-sm-5">
         <ul class="list-group d-flex" v-if="pessoas.length > 0">
+          <!-- componente de cadastro -->
           <PessoaSalvar
             class="list-group-item"
             v-if="exibirFormulario"
@@ -30,9 +38,10 @@
           class="list-group d-flex flex-row flex-wrap"
           v-if="pessoas.length > 0"
         >
+          <!-- componente de lista, recebe o array pessoa(filtrado) e cria uma lista com vfor no componente ListaItem -->
           <PessoaListaIten
             class="list-group-item"
-            v-for="pessoa in pessoas"
+            v-for="pessoa in pessoasOrdenadas"
             :key="pessoa.id"
             :pessoa="pessoa"
             @editar="selecionarUsuarioEditar"
@@ -40,9 +49,8 @@
           />
         </ul>
 
-        <p v-else-if="!mensagemErro">Nenhuma usuario criado.</p>
+        <p v-else-if="!mensagemErro">Nenhuma usuário criado.</p>
         <div class="alert alert-danger" v-else>{{ mensagemErro }}</div>
-        <!-- a variavel foi criada em  emit: pessoaSalvar -->
       </div>
     </div>
     <button class="btn btn-secondary float-right" @click="voltar">
@@ -70,6 +78,7 @@ export default {
       mensagemErro: undefined,
     };
   },
+
   beforeRouteUpdate(to, pessoas, next) {
     pessoas.id = to.params.id;
     next();
@@ -99,13 +108,11 @@ export default {
       });
   },
   computed: {
-    usuariosFiltrados() {
-      const busca = this.busca;
-      return !busca
-        ? this.pessoas
-        : this.pessoas.filter((c) =>
-            c.nome.toLowerCase().includes(busca.toLowerCase())
-          );
+    //filtro simples exibe o Id mais recente de acordo com o if ternario " ?  : "
+    pessoasOrdenadas() {
+      return this.pessoas.slice().sort((p1, p2) => {
+        return p1.id > p2.id ? -1 : p1.id < p2.id ? 1 : 0;
+      });
     },
   },
 
@@ -141,6 +148,7 @@ export default {
         this.resetar();
       });
     },
+    // fecha o formulario apos o uso
     resetar() {
       this.usuarioSelecionado = undefined;
       this.exibirFormulario = false;

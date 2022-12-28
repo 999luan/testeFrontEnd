@@ -1,3 +1,6 @@
+// O Usuario view recebe por padrão o componente que vai ser exibido, e o router
+view
+
 <template>
   <div class="row">
     <PessoasLista />
@@ -6,7 +9,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import PessoasLista from "@/components/listas/PessoasLista.vue";
 
 export default {

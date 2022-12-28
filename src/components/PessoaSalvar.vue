@@ -1,7 +1,10 @@
+//os formularios desta area enviam o objeto "pessoaLocal" no metodo salvar
+//metodo salvar pode receber os parametro "criar", e " editar", o metodo é usado
+no componente principal de lista
 <template>
   <div class="mt-4">
     <hr />
-    <h2 class="font-weight-light">Salvar Usuario</h2>
+    <h2 class="font-weight-light">Salvar Usuário</h2>
     <form @submit.prevent="salvar">
       <div class="row">
         <div :class="classeColuna">
@@ -16,14 +19,14 @@
               required
             />
 
-            <label>Cpf:</label>
+            <label>CPF:</label>
             <input
               type="number"
-              pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
+              pattern="\d{3}\.?\d{3}\.?\d{3}-?\d{2}"
               class="form-control"
-              placeholder="Cpf"
+              placeholder="CPF"
               v-model="pessoaLocal.cpf"
-              title="Insira seu CPF"
+              oninvalid="this.setCustomValidity('Insira um CPF com 11 digitos')"
               required
             />
             <label>Data de Nascimento:</label>
@@ -32,7 +35,7 @@
               class="form-control"
               placeholder="Data de nascimento"
               v-model="pessoaLocal.dataNascimento"
-              title="Insira sua data de Nascimento"
+              oninvalid="this.setCustomValidity('Insira sua data de Nascimento')"
               required
             />
           </div>

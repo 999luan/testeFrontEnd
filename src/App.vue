@@ -1,26 +1,24 @@
+//Aqui exibo a rota atual pelo router view, e os seletores de abas que vão
+aparecer acima //** o router view do app é todo o app
+
 <template>
   <div id="app">
-    <div class="row w-80">
-      <div class="container-fluid p-8 fundo">
-        <div class="jumbotron jumbotron-fluid fundo">
-          <h1 class="display-1 text-white">Gerenciador de Estoque</h1>
+    <div class="row w-auto fundo">
+      <div class="container-fluid p-8 bg-transparent">
+        <div class="jumbotron jumbotron-fluid bg-transparent">
+          <h1 class="display-2 text-light text-left">Cadastrando Dados</h1>
 
-          <p class="lead text-light text-justify">O Slogan da sua marca</p>
-          <div class="col-sm-12 container text-right bg-transparent">
-            <input
-              type="text"
-              class="form-control-sm"
-              placeholder="Busque aqui"
-            />
-            <button class="btn btn-primary ml-2">Busca</button>
-          </div>
+          <p class="lead text-light text-center ml-4">
+            O Slogan da sua marca bem aqui!
+          </p>
         </div>
+        <!-- O arquivo com as rotas pode ser encontrado na pasta router -->
         <div class="ml-md-4">
           <router-link
             to="/usuario"
             class="btn btn-primary mb-4 mr-2"
             active-class="active"
-            >Usuario</router-link
+            >Usuário</router-link
           >
 
           <!-- //o bootsrap possui uma classe router-ativa chamada "active" //-->
@@ -52,6 +50,13 @@
 }
 .fundo {
   background-image: url("./assets/logo.png");
+
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.fundoBaner {
+  background-image: url("./assets/logo.png");
+
   background-repeat: no-repeat;
   background-size: cover;
 }

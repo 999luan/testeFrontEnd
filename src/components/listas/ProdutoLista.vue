@@ -1,7 +1,15 @@
+//lista é a parte funcional do componente //as requisições são feitas e é criado
+o array "produto" dentro de data. // lista é a parte funcional do componente //
+Axios executa os methodos e o get é retornado para o array " produto" // o array
+produto é filtrado, e enviado para o componente de item ("ProdutoListaIten") //
+(ProdutoSalvar) executa um put utilizando axios e se comunica com a rede //botao
+chama metodo de deletar usuario, que utiliza axios para fazer um "Delet"//@criar
+e @editar são criados no metodo Salvar de ProdutoSalvar
 <template>
-  <div>
+  <div class="bg-transparent">
     <div class="row">
       <div class="container">
+        <!-- botão que chama methodo para abrir componente de novo produto (Produto Salvar) -->
         <button
           class="btn btn-primary float-right"
           @click="exibirFormularioCriarProduto"
@@ -16,6 +24,7 @@
 
       <div class="col-sm-12">
         <ul class="list-group d-flex" v-if="produtos.length > 0">
+          <!-- componente de cadastro -->
           <ProdutoSalvar
             class="list-group-item"
             v-if="exibirFormulario"
@@ -24,7 +33,7 @@
             @editar="editarProduto"
           />
         </ul>
-
+        <!-- componente de lista, recebe o array produto, e cria uma lista com vfor no componente ListaItem-->
         <div class="col-sm-12">
           <ul
             class="list-group d-flex flex-row flex-wrap"
@@ -121,23 +130,48 @@ export default {
     deletarProduto(produto) {
       const confirmar = window.confirm(`Deseja deletar produto?`);
       if (confirmar) {
-        axios.delete(`/produtos/${produto.id}`).then((response) => {
-          console.log("Deletado");
-          const indice = this.produtos.findIndex((p) => p.id === produto.id);
-          this.produtos.splice(indice, 1);
-          this.resetar();
-        });
+        axios
+          .delete(`/produtos/${produto.id}`)
+          .then((response) => {
+            console.log("Deletado");
+            const indice = this.produtos.findIndex((p) => p.id === produto.id);
+            this.produtos.splice(indice, 1);
+            this.resetar();
+          })
+          .catch((error) => {
+            console.log("Erro encontrado no catch", error);
+            if (error.response) {
+              this.mensagemErro = `Servidor retornou um error: ${error.message} ${error.response.statusText}`;
+            } else if (error.request) {
+              this.mensagemErro = `Erro ao tentar comunicar com o servidor: ${error.message}`;
+            } else {
+              this.mensagemErro = `Erro ao fazer requisição ao servidor: ${error.message}`;
+            }
+          });
       }
     },
 
     editarProduto(produto) {
-      axios.put(`/produtos/${produto.id}`, produto).then((response) => {
-        console.log(`PUT /produtos/${produto.id}`, response);
-        const indice = this.produtos.findIndex((p) => p.id === produto.id);
-        this.produtos.splice(indice, 1, produto);
-        this.resetar();
-      });
+      axios
+        .put(`/produtos/${produto.id}`, produto)
+        .then((response) => {
+          console.log(`PUT /produtos/${produto.id}`, response);
+          const indice = this.produtos.findIndex((p) => p.id === produto.id);
+          this.produtos.splice(indice, 1, produto);
+          this.resetar();
+        })
+        .catch((error) => {
+          console.log("Erro encontrado no catch", error);
+          if (error.response) {
+            this.mensagemErro = `Servidor retornou um error: ${error.message} ${error.response.statusText}`;
+          } else if (error.request) {
+            this.mensagemErro = `Erro ao tentar comunicar com o servidor: ${error.message}`;
+          } else {
+            this.mensagemErro = `Erro ao fazer requisição ao servidor: ${error.message}`;
+          }
+        });
     },
+    // fecha o formulario apos o uso
     resetar() {
       this.produtoSelecionado = undefined;
       this.exibirFormulario = false;

@@ -1,3 +1,6 @@
+// O Produto view recebe por padrão o componente que vai ser exibido, e o router
+view.
+
 <template>
   <div class="row">
     <ProdutoLista />

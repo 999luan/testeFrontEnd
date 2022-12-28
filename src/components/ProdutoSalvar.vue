@@ -1,3 +1,6 @@
+//os formularios desta area enviam o objeto "produtoLocal" no metodo salvar
+//metodo salvar pode receber os parametro "criar", e " editar", o metodo é usado
+no componente principal de lista
 <template>
   <div class="mt-4">
     <hr />
